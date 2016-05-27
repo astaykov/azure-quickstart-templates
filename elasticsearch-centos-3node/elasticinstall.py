@@ -35,7 +35,10 @@ cmds = ["yum -y install nano",
 	"/usr/share/elasticsearch/bin/plugin -install royrusso/elasticsearch-HQ",
 	"/usr/share/elasticsearch/bin/plugin -install rmobz/elasticsearch-head",
 	"/usr/share/elasticsearch/bin/plugin -install mapper-attachments",
-	"/usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-cloud-azure/2.8.2"]
+	"/usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-cloud-azure/2.8.2",
+	"wget https://download.elastic.co/kibana/kibana/kibana-4.5.1-1.x86_64.rpm kibana.rpm",
+	"rpm -ivh kibana-4.5.1-1.x86_64.rpm",
+	"systemctl enable kibana.service"]
 
 print "start running installs"
 for cmd in cmds:
@@ -107,5 +110,6 @@ print "finished writing config file"
 
 
 RunCommand("systemctl start elasticsearch")
+RunCommand("systemctl start kibana")
 print "elastic install script finished"
 
