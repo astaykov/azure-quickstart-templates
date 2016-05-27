@@ -38,8 +38,8 @@ cmds = ["yum -y install nano",
 	"/usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-cloud-azure/2.8.2",
 	"/usr/share/elasticsearch/bin/plugin -install license",
         "/usr/share/elasticsearch/bin/plugin -install marvel-agent",
-	"wget https://download.elastic.co/kibana/kibana/kibana-4.5.1-1.x86_64.rpm kibana.rpm",
-	"rpm -ivh kibana-4.5.1-1.x86_64.rpm",
+	"curl  'https://download.elastic.co/kibana/kibana/kibana-4.5.1-1.x86_64.rpm' -o 'kibana.rpm'",
+	"rpm -ivh kibana.rpm",
 	"/opt/kibana/bin/kibana plugin --install elasticsearch/marvel/latest",
 	"systemctl enable kibana.service"]
 
