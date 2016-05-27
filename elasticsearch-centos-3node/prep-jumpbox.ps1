@@ -35,3 +35,10 @@ copy "get-started.ps1" "$env:Public\Desktop\get-started.ps1"
 
 #Install IIS
 add-windowsfeature web-server -includeallsubfeature
+$lsBaseDir = "${Env:ProgramFiles(x86)}\Logstash"
+New-Item -Path $lsBaseDir -Type Directory -Force
+$lsZip = "https://download.elastic.co/logstash/logstash/logstash-all-plugins-2.3.1.zip"
+$lsTarget = "${$lsBaseDir}\Logstash.zip"
+Invoke-WebRequest $lsZip -OutFile $lsTarget
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+[System.IO.Compression.ZipFile]::ExtractToDirectory("${$lsBaseDir}\Logstash.zip", $lsBaseDir)
