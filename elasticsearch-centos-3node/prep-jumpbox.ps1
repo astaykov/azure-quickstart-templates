@@ -21,9 +21,17 @@ Invoke-WebRequest $datasource -OutFile $datadest
 #put shortcut to first node HQ on desktop
 New-Item "$env:Public\Desktop\elasticHQ.url" -type file -force -value "[InternetShortcut]`nURL=http://10.0.2.10:9200/_plugin/HQ/"
 
+#put shortcut to Kibana (first Node) on desktop
+New-Item "$env:Public\Desktop\elasticHQ.url" -type file -force -value "[InternetShortcut]`nURL=http://10.0.2.10:5601/"
+
+#put shortcut to Marvel (first node) on desktop
+New-Item "$env:Public\Desktop\elasticHQ.url" -type file -force -value "[InternetShortcut]`nURL=http://10.0.2.10:5601/app/marvel/"
+
 #associate ps1 with powershell_ise
 Invoke-Expression -Command:"cmd.exe /C Ftype Microsoft.PowerShellScript.1=C:\Windows\System32\WindowsPowerShell\v1.0\powershell_ise.exe %1"
 
 #copy to desktop for easy access
 copy "get-started.ps1" "$env:Public\Desktop\get-started.ps1"
 
+#Install IIS
+add-windowsfeature web-server -includeallsubfeature
