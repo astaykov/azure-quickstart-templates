@@ -70,7 +70,7 @@ for cmd in cmds:
 #re-write conf for heap
 sysconf = '/etc/sysconfig/elasticsearch'
 RunCommand("mv " + sysconf + " " + sysconf + ".bak")
-heapsize="2g"
+heapsize="4g"
 sysconfig = open(sysconf, 'w')
 sysconfig.truncate()
 sysconfig.write("ES_HEAP_SIZE=" + heapsize + "\n")
