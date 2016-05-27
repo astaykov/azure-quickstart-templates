@@ -29,10 +29,12 @@ def RunCommand(cmd):
 
 cmds = ["yum -y install nano",
 	"yum -y install java-1.8.0-openjdk.x86_64",
-	"curl 'https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.3.noarch.rpm' -o 'elasticsearch-1.7.3.noarch.rpm'",
-	"rpm -ivh elasticsearch-1.7.3.noarch.rpm",
+	"curl 'https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/2.3.3/elasticsearch-2.3.3.rpm' -o 'elasticsearch-2.3.3.rpm'",
+	"rpm -ivh elasticsearch-2.3.3.rpm",
 	"systemctl enable elasticsearch.service",
 	"/usr/share/elasticsearch/bin/plugin -install royrusso/elasticsearch-HQ",
+	"/usr/share/elasticsearch/bin/plugin -install rmobz/elasticsearch-head",
+	"/usr/share/elasticsearch/bin/plugin -install mapper-attachments",
 	"/usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-cloud-azure/2.8.2"]
 
 print "start running installs"
