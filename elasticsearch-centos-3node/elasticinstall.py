@@ -112,6 +112,12 @@ config.close()
 
 print "finished writing config file" 
 
+kibanaconf = '/opt/kibana/config/kibana.yml'
+RunCommand("mv " + kibanaconf + " " + kibanaconf + ".bak")
+kconfig = open(kibanaconf, 'w')
+kconfig.truncate()
+kconfig.write("elasticsearch.url: "http://vm0:9200"\n")
+config.close()
 
 RunCommand("systemctl start elasticsearch")
 RunCommand("systemctl start kibana")
