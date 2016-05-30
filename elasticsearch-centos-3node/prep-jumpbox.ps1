@@ -72,8 +72,8 @@ New-Item -Path $lsBaseDir -Type Directory -Force
 $lsZip = "https://download.elastic.co/logstash/logstash/logstash-all-plugins-2.3.1.zip"
 $lsTarget = "${$lsBaseDir}\Logstash.zip"
 Invoke-WebRequest $lsZip -OutFile $lsTarget
-[System.IO.Compression.ZipFile]::ExtractToDirectory("${$lsBaseDir}\Logstash.zip", $lsBaseDir)
+[System.IO.Compression.ZipFile]::ExtractToDirectory($lsTarget, $lsBaseDir)
 
 #copy logstash config to logstash base dir
-copy "iis.conf" "$lsTarget\iis.conf"
+copy "iis.conf" "${$lsBaseDir}\iis.conf"
 
