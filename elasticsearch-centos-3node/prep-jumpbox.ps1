@@ -49,7 +49,7 @@ Start-Process -FilePath "D:\WebPi\WebpiCmd.exe" -Argumentlist @("/Install","/Acc
 $DemoSiteZip = "DemoSite.zip"
 $DemoSiteTargetDir = "D:\Demosite"
 [System.IO.Compression.ZipFile]::ExtractToDirectory($DemoSiteZip, $DemoSiteTargetDir)
-Start-Process -FilePath "D:\DemoSite\WebTestForElk.deploy.cmd" -Argumentlist @("/Y") -WorkingDirectory $DemoSiteTargetDir" -Wait
+Start-Process -FilePath "D:\Demosite\WebTestForElk.deploy.cmd" -Argumentlist @("/Y") -WorkingDirectory $DemoSiteTargetDir -Wait
 
 #Install Java
 $jreUrl = "http://download.oracle.com/otn-pub/java/jdk/8u91-b15/jdk-8u91-windows-x64.exe"
@@ -75,5 +75,5 @@ Invoke-WebRequest $lsZip -OutFile $lsTarget
 [System.IO.Compression.ZipFile]::ExtractToDirectory("${$lsBaseDir}\Logstash.zip", $lsBaseDir)
 
 #copy logstash config to logstash base dir
-copy "iis.conf" "$lsTarget"
+copy "iis.conf" "$lsTarget\iis.conf"
 
