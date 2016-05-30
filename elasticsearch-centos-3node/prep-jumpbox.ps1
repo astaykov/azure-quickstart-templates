@@ -19,7 +19,7 @@ Invoke-WebRequest $datasource -OutFile $datadest
 
 
 #put shortcut to first node HQ on desktop
-New-Item "$env:Public\Desktop\elasticHQ.url" -type file -force -value "[InternetShortcut]`nURL=http://10.0.2.10:9200/_plugin/HQ/"
+New-Item "$env:Public\Desktop\elasticHQ.url" -type file -force -value "[InternetShortcut]`nURL=http://10.0.2.10:9200/_plugin/hq/"
 
 #put shortcut to Kibana (first Node) on desktop
 New-Item "$env:Public\Desktop\Kibana.url" -type file -force -value "[InternetShortcut]`nURL=http://10.0.2.10:5601/"
@@ -46,7 +46,7 @@ $WebPiTargetDir = "D:\WebPi"
 Start-Process -FilePath "D:\WebPi\WebpiCmd.exe" -Argumentlist @("/Install","/AcceptEula","/Products:WDeploy") -WorkingDirectory $WebPiTargetDir" -Wait
 
 #Install DemoSite
-$DemoSiteZip = "Demosite.zip"
+$DemoSiteZip = "DemoSite.zip"
 $DemoSiteTargetDir = "D:\Demosite"
 [System.IO.Compression.ZipFile]::ExtractToDirectory($DemoSiteZip, $DemoSiteTargetDir)
 Start-Process -FilePath "D:\DemoSite\WebTestForElk.deploy.cmd" -Argumentlist @("/Y") -WorkingDirectory $DemoSiteTargetDir" -Wait
