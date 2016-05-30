@@ -43,7 +43,7 @@ add-windowsfeature web-server -includeallsubfeature
 $WebPi = "WebPi.zip"
 $WebPiTargetDir = "D:\WebPi"
 [System.IO.Compression.ZipFile]::ExtractToDirectory($WebPi, $WebPiTargetDir)
-Start-Process -FilePath "D:\WebPi\WebpiCmd.exe" -Argumentlist @("/Install","/AcceptEula","/Products:WDeploy") -WorkingDirectory $WebPiTargetDir -Wait
+Start-Process -FilePath "D:\WebPi\WebpiCmd-x64.exe" -Argumentlist @("/Install","/AcceptEula","/Products:WDeploy") -WorkingDirectory $WebPiTargetDir -Wait
 
 #Install DemoSite
 $DemoSiteZip = "DemoSite.zip"
