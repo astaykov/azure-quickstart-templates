@@ -40,6 +40,7 @@ cmds = ["yum -y install nano",
         "/usr/share/elasticsearch/bin/plugin install marvel-agent -b",
 	"wget  'https://download.elastic.co/kibana/kibana/kibana-4.5.1-1.x86_64.rpm'",
 	"rpm -Uvh kibana-4.5.1-1.x86_64.rpm",
+	"chown kibana.kibana /optn/kibana -R",
 	"/opt/kibana/bin/kibana plugin --install elasticsearch/marvel/latest",
 	"systemctl enable kibana.service"]
 
