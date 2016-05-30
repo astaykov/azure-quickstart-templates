@@ -95,6 +95,7 @@ filename = '/etc/elasticsearch/elasticsearch.yml'
 RunCommand("mv " + filename + " " + filename + ".bak")
 config = open(filename, 'w')
 config.truncate()
+config.write("network.host: " + _site_ + "\n")
 config.write("cluster.name: " + clustername + "\n")
 config.write("node.name: " + hostname + "\n")
 config.write("path.data: " + datapath + "\n")
