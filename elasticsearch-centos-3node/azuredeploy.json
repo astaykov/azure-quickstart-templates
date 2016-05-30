@@ -59,7 +59,9 @@
     ],
     "jumpboxScripts": [
         "[concat(variables('scriptBaseUrl'), variables('jumpboxScript'))]",
-        "[concat(variables('scriptBaseUrl'), 'get-started.ps1')]"
+        "[concat(variables('scriptBaseUrl'), 'get-started.ps1')]",
+        "[concat(variables('scriptBaseUrl'), 'WebPi.zip')]",
+        "[concat(variables('scriptBaseUrl'), 'DemoSite.zip')]"
     ]
     
   },
