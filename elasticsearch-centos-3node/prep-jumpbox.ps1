@@ -33,12 +33,46 @@ Invoke-Expression -Command:"cmd.exe /C Ftype Microsoft.PowerShellScript.1=C:\Win
 #copy to desktop for easy access
 copy "get-started.ps1" "$env:Public\Desktop\get-started.ps1"
 
+#Add System.IO.Compression.FileSystem Type
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+
 #Install IIS
 add-windowsfeature web-server -includeallsubfeature
+
+#Install WebDeploy
+$WebPi = "WebPi.zip"
+$WebPiTargetDir = "D:\WebPi"
+[System.IO.Compression.ZipFile]::ExtractToDirectory($WebPi, $WebPiTargetDir)
+Start-Process -FilePath "D:\WebPi\WebpiCmd.exe" -Argumentlist @("/Install","/AcceptEula","/Products:WDeploy") -WorkingDirectory $WebPiTargetDir" -Wait
+
+#Install DemoSite
+$DemoSiteZip = "Demosite.zip"
+$DemoSiteTargetDir = "D:\Demosite"
+[System.IO.Compression.ZipFile]::ExtractToDirectory($DemoSiteZip, $DemoSiteTargetDir)
+Start-Process -FilePath "D:\DemoSite\WebTestForElk.deploy.cmd" -Argumentlist @("/Y") -WorkingDirectory $DemoSiteTargetDir" -Wait
+
+#Install Java
+$jreUrl = "http://download.oracle.com/otn-pub/java/jdk/8u91-b15/jdk-8u91-windows-x64.exe"
+$jreTarget = "d:\jdk-8u91-windows-x64.exe"
+$session = New-Object Microsoft.PowerShell.Commands.WebRequestSession
+$cookie = New-Object System.Net.Cookie 
+$cookie.Name = "oraclelicense"
+$cookie.Value = "accept-securebackup-cookie"
+$cookie.Domain = ".oracle.com"
+$session.Cookies.Add($cookie);
+Invoke-WebRequest $jreUrl -WebSession $session -TimeoutSec 900 -OutFile $jreTarget
+Start-Process -FilePath $jreTarget -PassThru -Wait -Argumentlist "/s"
+[Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\Program Files\Java\jdk1.8.0_91", "Machine")
+[Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\Program Files\Java\jdk1.8.0_91", "User")
+$env:JAVA_HOME = "C:\Program Files\Java\jdk1.8.0_91"
+
+#Install LogStash
 $lsBaseDir = "${Env:ProgramFiles(x86)}\Logstash"
 New-Item -Path $lsBaseDir -Type Directory -Force
 $lsZip = "https://download.elastic.co/logstash/logstash/logstash-all-plugins-2.3.1.zip"
 $lsTarget = "${$lsBaseDir}\Logstash.zip"
 Invoke-WebRequest $lsZip -OutFile $lsTarget
-Add-Type -AssemblyName System.IO.Compression.FileSystem
 [System.IO.Compression.ZipFile]::ExtractToDirectory("${$lsBaseDir}\Logstash.zip", $lsBaseDir)
+
+
+
