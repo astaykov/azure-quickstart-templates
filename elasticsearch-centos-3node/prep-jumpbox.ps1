@@ -74,5 +74,6 @@ $lsTarget = "${$lsBaseDir}\Logstash.zip"
 Invoke-WebRequest $lsZip -OutFile $lsTarget
 [System.IO.Compression.ZipFile]::ExtractToDirectory("${$lsBaseDir}\Logstash.zip", $lsBaseDir)
 
-
+#copy logstash config to logstash base dir
+copy "iis.conf" "$lsTarget"
 
