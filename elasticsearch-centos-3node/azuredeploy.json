@@ -25,11 +25,23 @@
       "metadata": {
         "description": "Prefix to use for common resources"
       }
+    },
+   "vmSize": {
+      "type": "string",
+      "defaultValue": "Standard_DS2",
+      "allowedValues": [
+		"Standard_DS12",
+		"Standard_DS11",
+		"Standard_DS2",
+		"Standard_DS1",
+       ],
+      "metadata": {
+        "description": "Easy Drop down for size of the VM"
+      }
     }
   },
   "variables": {
     "apiVersion": "2015-06-15",
-    "vmSize": "Standard_D2",
     "clusterName": "elasticcluster",
     "logTableName": "elasticscriptlog",
     "imagePublisher" : "OpenLogic",
@@ -37,8 +49,8 @@
     "imageSku" : "7.1",
     "availabilitySetName": "[concat(parameters('VMPrefix'), 'AvSet')]",
     "storageName" : "[toLower(concat(parameters('commonPrefix'), uniqueString(resourceGroup().id)))]",
-    "storageAccountType": "Standard_LRS",
-    "dataDiskSize": "1023",
+    "storageAccountType": "Premium_LRS",
+    "dataDiskSize": "512",
     "virtualNetworkName":  "[concat(parameters('commonPrefix'), 'VNet')]" ,
     "publicIPAddressName": "JumpboxIP",
     "publicIPAddressType": "Dynamic",
@@ -224,7 +236,7 @@
           "id": "[resourceId('Microsoft.Compute/availabilitySets',variables('availabilitySetName'))]"
         },
         "hardwareProfile": {
-          "vmSize": "[variables('vmSize')]"
+          "vmSize": "[parameters('vmSize')]"
         },
         "osProfile": {
           "computerName": "[concat(parameters('vmPrefix'), copyIndex())]",
@@ -334,7 +346,7 @@
       ],
       "properties": {
         "hardwareProfile": {
-          "vmSize": "[variables('vmSize')]"
+          "vmSize": "[parameters('vmSize')]"
         },
         "osProfile": {
           "computerName": "Jumpbox",
